@@ -52,5 +52,5 @@ app.get("/broadcast", async (req: Request, res: Response) => {
 });
 
 app.listen(PORT, () => {
-	console.log(`🚀 Webhook running at http://localhost:${PORT}/webhook`);
+	console.log(`Webhook running at http://localhost:${PORT}/webhook`);
 });
