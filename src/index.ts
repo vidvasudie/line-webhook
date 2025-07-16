@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
-import { replyMessage, pushMessage, broadcastMessage } from "./line";
+import { replyMessage, pushMessage, broadcastMessage } from "./lib/line";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,7 +47,7 @@ app.get("/broadcast", async (req: Request, res: Response) => {
 		return res.status(400).json({ error: "Missing text" });
 	}
 
-    console.log(text)
+	console.log(text);
 
 	await broadcastMessage(String(text));
 	res.json({ status: "broadcast sent", message: text });
