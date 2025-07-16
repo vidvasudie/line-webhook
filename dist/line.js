@@ -8,7 +8,8 @@ exports.pushMessage = pushMessage;
 exports.broadcastMessage = broadcastMessage;
 const axios_1 = __importDefault(require("axios"));
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+const path_1 = __importDefault(require("path"));
+dotenv_1.default.config({ path: path_1.default.resolve(__dirname, "../.env") });
 const LINE_API_URL = "https://api.line.me/v2/bot/message";
 const TOKEN = process.env.CHANNEL_ACCESS_TOKEN;
 const headers = {
@@ -30,6 +31,8 @@ async function replyMessage(replyToken, text) {
 // ฟังก์ชัน push ข้อความหา user
 async function pushMessage(userId, text) {
     try {
+        console.log(`${LINE_API_URL}/push`);
+        console.log(`headers: ${JSON.stringify(headers)}`);
         await axios_1.default.post(`${LINE_API_URL}/push`, {
             to: userId,
             messages: [{ type: "text", text }],
@@ -42,6 +45,8 @@ async function pushMessage(userId, text) {
 // ส่งข้อความแบบ Broadcast
 async function broadcastMessage(text) {
     try {
+        console.log(`${LINE_API_URL}/broadcast`);
+        console.log(`headers: ${JSON.stringify(headers)}`);
         await axios_1.default.post(`${LINE_API_URL}/broadcast`, {
             messages: [{ type: "text", text }],
         }, { headers });

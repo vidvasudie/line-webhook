@@ -40,6 +40,7 @@ app.get("/broadcast", async (req, res) => {
     if (!text) {
         return res.status(400).json({ error: "Missing text" });
     }
+    console.log(text);
     await (0, line_1.broadcastMessage)(String(text));
     res.json({ status: "broadcast sent", message: text });
 });

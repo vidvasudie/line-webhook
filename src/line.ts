@@ -1,7 +1,8 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const LINE_API_URL = "https://api.line.me/v2/bot/message";
 const TOKEN = process.env.CHANNEL_ACCESS_TOKEN;
@@ -30,6 +31,8 @@ export async function replyMessage(replyToken: string, text: string) {
 // ฟังก์ชัน push ข้อความหา user
 export async function pushMessage(userId: string, text: string) {
 	try {
+		console.log(`${LINE_API_URL}/push`);
+		console.log(`headers: ${JSON.stringify(headers)}`);
 		await axios.post(
 			`${LINE_API_URL}/push`,
 			{
@@ -46,6 +49,8 @@ export async function pushMessage(userId: string, text: string) {
 // ส่งข้อความแบบ Broadcast
 export async function broadcastMessage(text: string) {
 	try {
+		console.log(`${LINE_API_URL}/broadcast`);
+		console.log(`headers: ${JSON.stringify(headers)}`);
 		await axios.post(
 			`${LINE_API_URL}/broadcast`,
 			{
